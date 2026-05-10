@@ -17,7 +17,7 @@ class Simulation
         Simulation();
 
         /**
-         * @brief Destroy the Simulation object
+         * @brief Destrcheat sheetoy the Simulation object
          * 
          */
         ~Simulation();

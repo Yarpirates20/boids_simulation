@@ -8,7 +8,7 @@
 class ISystem
 {
     public:
-        virtual void update(std::vector<SimObject>, float deltaTime) = 0;
+        virtual void update(std::vector<std::shared_ptr<SimObject>>& objects, float deltaTime) = 0;
 };
 
 #endif // ISYSTEM_H

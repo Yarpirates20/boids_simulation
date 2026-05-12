@@ -16,6 +16,10 @@ public:
     KinematicsComponent kinematics;
     SettingsComponent settings;
 
+    /**
+     * @brief Destroy the Sim Object object
+     * 
+     */
     virtual ~SimObject() = default;
 
     /**
@@ -30,6 +34,10 @@ protected:
     // for each created entity.
     inline static uint64_t nextId = 0;
 
+    /**
+     * @brief Construct a new Sim Object object
+     * 
+     */
     SimObject() : id(nextId++) {}
 };
 

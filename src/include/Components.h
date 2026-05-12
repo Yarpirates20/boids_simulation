@@ -5,9 +5,9 @@
 
 struct KinematicsComponent
 {
-    sf::Vector2 position;
-    sf::Vector2 velocity;
-    sf::Vector2 acceleration;
+    sf::Vector2f position;
+    sf::Vector2f velocity;
+    sf::Vector2f acceleration;
 };
 
 struct SettingsComponent

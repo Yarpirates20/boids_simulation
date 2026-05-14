@@ -12,7 +12,6 @@ class Application
         Simulation sim;
         
         sf::Clock m_clock;
-        sf::Time m_elapsed;
 
     public:
         /**
@@ -33,18 +32,7 @@ class Application
          */
         void run();
 
-        /**
-         * @brief Get the elapsed time between frames.
-         * 
-         * @return sf::Time Length of time as sf::Time type.
-         */
-        sf::Time getElapsed();
-
-        /**
-         * @brief Restarts the time count between frames.
-         * 
-         */
-        void restartClock();
+    
 };
 
 #endif // APPLICATION_H

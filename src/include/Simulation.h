@@ -2,6 +2,7 @@
 #define SIMULATION_H
 
 #include "SimObject.h"
+#include "Boid.h"
 #include "ISystem.h"
 #include "IntegrationSystem.h"
 
@@ -14,6 +15,8 @@ class Simulation
     private:
         std::vector<std::shared_ptr<SimObject>> objects;
         std::vector<std::unique_ptr<ISystem>> systems;
+        float worldWidth;
+        float worldHeight;
 
     public:
         /**
@@ -31,6 +34,11 @@ class Simulation
          */
         ~Simulation();
 
+        /**
+         * @brief Manages the order in which Systems process data
+         * 
+         * @param deltaTime Processing time for a single frame
+         */
         void update(float deltaTime);
         
         // void render();
@@ -43,6 +51,8 @@ class Simulation
          * @return const std::vector<std::shared_ptr<SimObject>>& Const vector of SimObjects.
          */
         const std::vector<std::shared_ptr<SimObject>>& getObjects() const { return objects; }
+
+        void addSingleBoidTest();
 
 };
 

@@ -24,4 +24,11 @@ struct BehaviorComponent
     float cohesionWeight;
 };
 
+struct RenderComponent 
+{
+    sf::Color color;
+    sf::ConvexShape body;
+};
+
+
 #endif // COMPONENTS_H

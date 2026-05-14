@@ -58,6 +58,7 @@ void Application::run()
 
         // draw
         window->clear();
+        sim.render(*window);
 
         window->display();
     }

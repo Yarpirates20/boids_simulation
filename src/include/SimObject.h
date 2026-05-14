@@ -15,6 +15,7 @@ public:
 
     KinematicsComponent kinematics;
     SettingsComponent settings;
+    RenderComponent render;
 
     /**
      * @brief Destroy the Sim Object object

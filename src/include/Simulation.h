@@ -41,7 +41,13 @@ class Simulation
          */
         void update(float deltaTime);
         
-        // void render();
+        /**
+         * @brief Translates abstract velocities of SimObjects
+         * into visual pixels to draw in the window.
+         * 
+         * @param window 
+         */
+        void render(sf::RenderWindow &window);
         
         // void addBoid();
 

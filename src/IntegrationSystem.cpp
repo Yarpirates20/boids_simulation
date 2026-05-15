@@ -38,7 +38,7 @@ void IntegrationSystem::update(std::vector<std::shared_ptr<SimObject>> &objects,
         {
             i->kinematics.position.y = 0;
         }
-        else if (i->kinematics.position.y < worldHeight)
+        else if (i->kinematics.position.y < 0)
         {
             i->kinematics.position.y = worldHeight;
         }

@@ -51,7 +51,7 @@ void Simulation::addSingleBoidTest()
     auto testBoid = std::make_shared<Boid>();
 
     testBoid->kinematics.position = sf::Vector2f(worldWidth / 2.0f, worldHeight / 2.0f);
-    testBoid->kinematics.velocity = sf::Vector2f(100.0f, 50.0f);
+    testBoid->kinematics.velocity = sf::Vector2f(-50.0f, 10.0f);
 
     testBoid->settings.maxSpeed = 10.0f;
 

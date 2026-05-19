@@ -4,6 +4,7 @@
 Simulation::Simulation(float width, float height, sf::RenderWindow &window) : worldWidth(width), worldHeight(height)
 {
     systems.push_back(std::make_unique<IntegrationSystem>(width, height));
+    systems.push_back(std::make_unique<SpatialSystem>(width, height, 50.0f));
 }
 
 /** @copydoc Simulation::~Simulation() */
@@ -34,15 +35,21 @@ void Simulation::render(sf::RenderWindow &window)
 
         // Update shape's rotation based on velocity
         // Only update rotation if the boid is actually moving
-        if (kinematics.velocity.x != 0 || kinematics.velocity.y != 0)
+        if (kinematics.velocity.x != 0.0f || kinematics.velocity.y != 0.0f)
         {
             float radians = std::atan2(kinematics.velocity.y, kinematics.velocity.x);
 
-            float degrees = radians * (180.0f / M_PI);
+            float degrees = radians * (180.0f / 3.14159265f);
             render.body.setRotation(sf::degrees(degrees));
         }
 
         window.draw(render.body);
+
+        sf::Vertex line[] = {
+            {kinematics.position, sf::Color::Red},
+            {kinematics.position + kinematics.acceleration * 0.5f, sf::Color::Red}};
+
+        window.draw(line, 2, sf::PrimitiveType::Lines);
     }
 }
 
@@ -56,4 +63,25 @@ void Simulation::addSingleBoidTest()
     testBoid->settings.maxSpeed = 10.0f;
 
     objects.push_back(testBoid);
+}
+
+void Simulation::addTwoBoidsTest()
+{
+    auto boid1 = std::make_shared<Boid>();
+    boid1->kinematics.position = sf::Vector2f(100.0f, 100.0f);
+    boid1->kinematics.velocity = sf::Vector2f(10.0f, 0.0f);
+    boid1->settings.perceptionRadius = 50.0f;
+    boid1->behavior.separationWeight = 1.5f;
+    boid1->behavior.alignmentWeight = 0.0f;
+    boid1->behavior.cohesionWeight = 0.0f;
+    objects.push_back(boid1);
+
+    auto boid2 = std::make_shared<Boid>();
+    boid2->kinematics.position = sf::Vector2f(110.0f, 100.0f);
+    boid2->kinematics.velocity = sf::Vector2f(-10.0f, 0.0f);
+    boid2->settings.perceptionRadius = 50.0f;
+    boid2->behavior.separationWeight = 1.5f;
+    boid2->behavior.alignmentWeight = 0.0f;
+    boid2->behavior.cohesionWeight = 0.0f;
+    objects.push_back(boid2);
 }

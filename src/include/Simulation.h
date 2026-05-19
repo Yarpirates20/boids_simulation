@@ -5,10 +5,12 @@
 #include "Boid.h"
 #include "ISystem.h"
 #include "IntegrationSystem.h"
+#include "SpatialSystem.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
+#include <cmath>
 
 class Simulation
 {
@@ -59,6 +61,8 @@ class Simulation
         const std::vector<std::shared_ptr<SimObject>>& getObjects() const { return objects; }
 
         void addSingleBoidTest();
+
+        void addTwoBoidsTest();
 
 };
 

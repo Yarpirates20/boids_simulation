@@ -23,6 +23,24 @@ SpatialSystem::SpatialSystem(float width, float height, float cellSize) : m_cell
 /** @copydoc SpatialSystem::update(std::vector<std::shared_ptr<SimObject>> &objects, float dt) */
 void SpatialSystem::update(std::vector<std::shared_ptr<SimObject>> &objects, float dt)
 {
+    for (auto &&cell : m_grid)
+    {
+        cell.clear();
+    }
+
+    for (const auto &obj: objects)
+    {
+        sf::Vector2i gridCoords = getGridCoords(obj->kinematics.position);
+
+        if (gridCoords.x >= 0 && gridCoords.x < m_cols &&
+            gridCoords.y >= 0 && gridCoords.y < m_rows)
+        {
+            int index = getIndex(gridCoords.x, gridCoords.y);
+
+            m_grid[index].push_back(obj);
+        }
+        
+    }
 }
 
 /** @copydoc patialSystem::getNeighbors(const sf::Vector2f &pos) const */

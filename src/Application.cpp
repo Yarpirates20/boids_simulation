@@ -15,7 +15,8 @@ Application::~Application()
 /** @copydoc Application::run() */
 void Application::run()
 {
-    sim.addSingleBoidTest();
+    // sim.addSingleBoidTest();
+    sim.addTwoBoidsTest();
     
     while (window->isOpen())
     {

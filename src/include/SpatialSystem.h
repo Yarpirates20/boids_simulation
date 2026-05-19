@@ -18,7 +18,7 @@ private:
     int m_cols;
     int m_rows;
 
-    std::vector<std::vector<std::shared_ptr<Boid>>> m_grid;
+    std::vector<std::vector<std::shared_ptr<SimObject>>> m_grid;
 
     /**
      * @brief Takes 2D grid coordinates and squashes them into 1D index.
@@ -48,8 +48,22 @@ public:
      */
     SpatialSystem(float width, float height, float cellSize);
 
+    /**
+     * @brief Called by every frame in Simulation to clear and populate grid 
+     * cells.
+     * 
+     * @param objects The vector of Simulation objects to loop through.
+     * @param dt Delta time.
+     */
     void update(std::vector<std::shared_ptr<SimObject>> &objects, float dt) override;
 
+    /**
+     * @brief Used by SteeringSystem to find nearby boids.
+     * 
+     * @param pos Position to find neighboring cells for.
+     * @return std::vector<std::shared_ptr<SimObject>> Vector containing all 
+     * boids found in neighboring cells.
+     */
     std::vector<std::shared_ptr<SimObject>> getNeighbors(const sf::Vector2f &pos) const;
 };
 

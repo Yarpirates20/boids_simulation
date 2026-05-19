@@ -6,6 +6,7 @@
 #include "ISystem.h"
 #include "IntegrationSystem.h"
 #include "SpatialSystem.h"
+#include "SpatialTestSystem.h"
 
 #include <SFML/Graphics.hpp>
 #include <vector>

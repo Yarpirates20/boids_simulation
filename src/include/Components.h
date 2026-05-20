@@ -14,14 +14,14 @@ struct SettingsComponent
 {
     float maxSpeed = 200.0f;
     float maxForce = 5.0f;
-    float perceptionRadius = 50.0f;
-    float desiredSeparation = 25.0f;
+    float perceptionRadius = 30.0f;
+    float desiredSeparation = 15.0f;
 };
 
 struct BehaviorComponent
 {
-    float separationWeight = 1.5f;
-    float alignmentWeight = 1.0f;
+    float separationWeight = 2.5f;
+    float alignmentWeight = 0.5f;
     float cohesionWeight = 1.0f;
 };
 

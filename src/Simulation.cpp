@@ -3,16 +3,36 @@
 /** @copydoc Simulation::Simulation(float width, float height, sf::RenderWindow &window)  */
 Simulation::Simulation(float width, float height, sf::RenderWindow &window) : worldWidth(width), worldHeight(height)
 {
+    // Random engine initialization
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Define standard float distributions
+    std::uniform_real_distribution<float> disX(0.0f, worldWidth);
+    std::uniform_real_distribution<float> disY(0.0f, worldHeight);
+    std::uniform_real_distribution<float> disVel(-120.0f, 120.0f);
+
+    for (int i = 0; i < 100; ++i)
+    {
+        auto boid = std::make_shared<Boid>();
+
+        // Assign random float vectors
+        boid->kinematics.position = sf::Vector2f{disX(gen), disY(gen)};
+        boid->kinematics.velocity = sf::Vector2f{0.0f, 0.0f};
+        boid->kinematics.acceleration = sf::Vector2f{0.0f, 0.0f};
+
+        objects.push_back(boid);
+    }
+
+
     auto spatial = std::make_unique<SpatialSystem>(width, height, 50.0f);
-    auto testSystem = std::make_unique<SpatialTestSystem>(*spatial);
+    // auto testSystem = std::make_unique<SpatialTestSystem>(*spatial);
     auto steering = std::make_unique<SteeringSystem>(*spatial);
 
     systems.push_back(std::move(spatial));
-    systems.push_back(std::move(testSystem));
+    // systems.push_back(std::move(testSystem));
     systems.push_back(std::move(steering));
 
-
-    
     // systems.push_back(std::make_unique<SpatialSystem>(width, height, 50.0f));
     systems.push_back(std::make_unique<IntegrationSystem>(width, height));
 }
@@ -56,15 +76,15 @@ void Simulation::render(sf::RenderWindow &window)
 
         window.draw(render.body);
 
-        sf::VertexArray accelerationLine(sf::PrimitiveType::Lines, 2);
+        // sf::VertexArray accelerationLine(sf::PrimitiveType::Lines, 2);
 
-        accelerationLine[0].position = kinematics.position;
-        accelerationLine[0].color = sf::Color::Green;
+        // accelerationLine[0].position = kinematics.position;
+        // accelerationLine[0].color = sf::Color::Green;
 
-        accelerationLine[1].position = kinematics.position + kinematics.velocity * 1.0f;
-        accelerationLine[1].color = sf::Color::Green;
+        // accelerationLine[1].position = kinematics.position + kinematics.velocity * 1.0f;
+        // accelerationLine[1].color = sf::Color::Green;
 
-        window.draw(accelerationLine);
+        // window.draw(accelerationLine);
         // sf::Vertex line[] = {
         //     {kinematics.position, sf::Color::Red},
         //     {kinematics.position + kinematics.acceleration * 0.5f, sf::Color::Red}};

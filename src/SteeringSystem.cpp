@@ -72,17 +72,21 @@ sf::Vector2f SteeringSystem::alignment(const std::shared_ptr<SimObject> &boid, c
     {
         averageVelocity /= static_cast<float>(validNeighbors);
 
-        auto desiredVelocity = averageVelocity.normalized() * boid->settings.maxSpeed;
-        auto steeringForce = desiredVelocity - boid->kinematics.velocity;
-
-        // Clamp
-        if (steeringForce.length() > boid->settings.maxForce)
+        if (averageVelocity.x != 0.0f || averageVelocity.y != 0.0f)
         {
-            steeringForce = steeringForce.normalized() * boid->settings.maxForce;
-        }
 
-        return steeringForce;
+            auto desiredVelocity = averageVelocity.normalized() * boid->settings.maxSpeed;
+            auto steeringForce = desiredVelocity - boid->kinematics.velocity;
+
+            // Clamp
+            if (steeringForce.length() > boid->settings.maxForce)
+            {
+                steeringForce = steeringForce.normalized() * boid->settings.maxForce;
+            }
+
+            return steeringForce;
         }
+    }
 
     return sf::Vector2f{0.0f, 0.0f};
 }
@@ -93,7 +97,7 @@ sf::Vector2f SteeringSystem::cohesion(const std::shared_ptr<SimObject> &boid, co
     sf::Vector2f averagePosition{0.0f, 0.0f};
     int validNeighbors = 0;
 
-    for (const auto& neighbor: neighbors)
+    for (const auto &neighbor : neighbors)
     {
         if (neighbor == boid)
         {
@@ -109,20 +113,23 @@ sf::Vector2f SteeringSystem::cohesion(const std::shared_ptr<SimObject> &boid, co
         averagePosition /= static_cast<float>(validNeighbors);
         auto targetVector = averagePosition - boid->kinematics.position;
 
-        //Reynolds Steering Calculation
-        auto desiredVelocity = targetVector.normalized() * boid->settings.maxSpeed;
-        auto steeringForce = desiredVelocity - boid->kinematics.velocity;
-
-        // Clamp
-        if (steeringForce.length() > boid->settings.maxForce)
+        if (targetVector.x != 0.0f || targetVector.y != 0.0f)
         {
-            steeringForce = steeringForce.normalized() * boid->settings.maxForce;
-        }
+            // Reynolds Steering Calculation
+            auto desiredVelocity = targetVector.normalized() * boid->settings.maxSpeed;
+            auto steeringForce = desiredVelocity - boid->kinematics.velocity;
 
-        return steeringForce;
+            // Clamp
+            if (steeringForce.length() > boid->settings.maxForce)
+            {
+                steeringForce = steeringForce.normalized() * boid->settings.maxForce;
+            }
+
+            return steeringForce;
+        }
     }
 
-    return sf::Vector2f{0.0f,0.0f};
+    return sf::Vector2f{0.0f, 0.0f};
 }
 
 /** @copydoc SteeringSystem::SteeringSystem(SpatialSystem &spatial) */

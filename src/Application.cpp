@@ -16,7 +16,7 @@ Application::~Application()
 void Application::run()
 {
     // sim.addSingleBoidTest();
-    sim.addTwoBoidsTest();
+    // sim.addTwoBoidsTest();
     
     while (window->isOpen())
     {
@@ -44,18 +44,18 @@ void Application::run()
         sim.update(deltaTime);
 
         // TEST PRINT
-        static float timer = 0;
-        timer += deltaTime;
-        if (timer >= 1.0f)
-        {
+        // static float timer = 0;
+        // timer += deltaTime;
+        // if (timer >= 1.0f)
+        // {
 
-            for (const auto &boid : sim.getObjects())
-            {
-                std::cout << "Pos: " << boid->kinematics.position.x << ", " << boid->kinematics.position.y << std::endl;
-            }
+        //     for (const auto &boid : sim.getObjects())
+        //     {
+        //         std::cout << "Pos: " << boid->kinematics.position.x << ", " << boid->kinematics.position.y << std::endl;
+        //     }
 
-            timer = 0;
-        }
+        //     timer = 0;
+        // }
 
         // draw
         window->clear();

@@ -4,11 +4,14 @@
 Simulation::Simulation(float width, float height, sf::RenderWindow &window) : worldWidth(width), worldHeight(height)
 {
     auto spatial = std::make_unique<SpatialSystem>(width, height, 50.0f);
-
     auto testSystem = std::make_unique<SpatialTestSystem>(*spatial);
+    auto steering = std::make_unique<SteeringSystem>(*spatial);
 
     systems.push_back(std::move(spatial));
     systems.push_back(std::move(testSystem));
+    systems.push_back(std::move(steering));
+
+
     
     // systems.push_back(std::make_unique<SpatialSystem>(width, height, 50.0f));
     systems.push_back(std::make_unique<IntegrationSystem>(width, height));

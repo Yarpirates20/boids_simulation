@@ -16,7 +16,8 @@ add_executable(main src/main.cpp
     src/Simulation.cpp
     src/IntegrationSystem.cpp
     src/Application.cpp
-    src/SpatialSystem.cpp)
+    src/SpatialSystem.cpp
+    src/SteeringSystem.cpp)
 target_compile_features(main PRIVATE cxx_std_17)
 target_include_directories(main PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src/include)
 target_link_libraries(main PRIVATE SFML::Graphics)

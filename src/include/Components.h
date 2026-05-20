@@ -15,6 +15,7 @@ struct SettingsComponent
     float maxSpeed = 200.0f;
     float maxForce = 5.0f;
     float perceptionRadius = 50.0f;
+    float desiredSeparation = 25.0f;
 };
 
 struct BehaviorComponent
